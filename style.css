@@ -274,3 +274,28 @@ button, input, textarea { font: inherit; color: inherit; }
   transition: transform .2s;
 }
 .wa-float:hover { transform: scale(1.06); }
+
+
+/* Social icons */
+.social-row {
+  display: flex;
+  gap: .65rem;
+  align-items: center;
+  margin-top: .25rem;
+}
+.social-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: var(--elevated);
+  border: 1px solid var(--border);
+  color: var(--text);
+  transition: border-color .2s, color .2s, background .2s;
+}
+.social-icon:hover {
+  border-color: rgba(47,155,255,.5);
+  color: var(--accent);
+  background: rgba(47,155,255,.08);
+}

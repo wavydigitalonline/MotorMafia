@@ -55,4 +55,44 @@
       window.open("https://wa.me/27849990444?text=" + encodeURIComponent(text), "_blank");
     });
   }
+
+
+  // Gallery: auto-load images/work-1.jpg … work-24.jpg (skips missing)
+  (function loadWorkGallery() {
+    const grid = document.getElementById("workGrid");
+    if (!grid) return;
+    const max = 24;
+    let pending = max;
+    let found = 0;
+
+    function finish() {
+      if (found === 0) {
+        grid.innerHTML = '<p class="work-empty" style="grid-column:1/-1;text-align:center;color:var(--muted)">Gallery photos coming soon.</p>';
+      }
+    }
+
+    for (let i = 1; i <= max; i++) {
+      const src = "images/work-" + i + ".jpg";
+      const img = new Image();
+      img.onload = function () {
+        found++;
+        const fig = document.createElement("figure");
+        fig.className = "work-item";
+        const el = document.createElement("img");
+        el.src = src;
+        el.alt = "Motor Mafia work " + i;
+        el.loading = "lazy";
+        fig.appendChild(el);
+        grid.appendChild(fig);
+        pending--;
+        if (pending === 0) finish();
+      };
+      img.onerror = function () {
+        pending--;
+        if (pending === 0) finish();
+      };
+      img.src = src;
+    }
+  })();
+
 })();
